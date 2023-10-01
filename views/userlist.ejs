@@ -1,38 +1,66 @@
 <%- include("layouts/header")-%>
-   
-<a href="/insertuser"> Create User</a> 
+
+<a href="/insertuser">Create User</a>
+
+<div class="fixed inset-0 flex items-center justify-center z-50 overflow-x-hidden overflow-y-auto outline-none focus:outline-none modal-bg">
+  <div class="relative w-auto max-w-md mx-auto my-6">
+    <div class="modal-box">
+      <div class="text-xl font-semibold mb-4">Confirm User Deletion</div>
+      <p class="mb-4">Are you sure you want to delete this user?</p>
+      <div class="text-right">
+        <button class="btn btn-secondary mr-2" onclick="closeModal()"> Cancel
+        </button>
+        <a href="#" class="btn btn-error" id="confirmDeleteButton">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="overflow-x-auto">
   <table class="table">
-    <thead >
+    <thead>
       <tr class="bg-base-300">
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
         <th>Actions</th>
-
       </tr>
     </thead>
     <tbody>
       <% userList.forEach((user) => { %>
       <tr class="hover">
-        
-          <td><%= user.id %></td>
-          <td><%= user.firstname %></td>
-          <td><%= user.lastname %></td>
-          <td><%= user.email %></td>
-          <td class="join join-vertical lg:join-horizontal space-x-2 lg:space-x-2">
-            <button class="btn btn-secondary"><a href="/edituser/<%=user.id%>">Edit</a></button>
-            <button class="btn btn-error"><a href="/deleteuser/<%=user.id%>">Delete</a></button>
-          </td>
-          
+        <td><%= user.id %></td>
+        <td><%= user.firstname %></td>
+        <td><%= user.lastname %></td>
+        <td><%= user.email %></td>
+        <td class="join join-vertical lg:join-horizontal space-x-2 lg:space-x-2">
+          <button class="btn btn-secondary"><a href="/edituser/<%=user.id%>">Edit</a></button>
+          <button class="btn btn-error" onclick="openModal('<%= user.id %>')">Delete</button>
+        </td>
       </tr>
-    <% }) %>
-
+      <% }) %>
     </tbody>
   </table>
 </div>
+
+<script>
+  // Functions to open and close the modal
+  function openModal(userId) {
+    const modalBg = document.querySelector('.modal-bg');
+    modalBg.style.display = 'block';
+
+    // Set the 'href' attribute of the delete button inside the modal
+    const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+    confirmDeleteButton.href = `/deleteuser/${userId}`;
+  }
+
+  function closeModal() {
+    const modalBg = document.querySelector('.modal-bg');
+    modalBg.style.display = 'none';
+  }
+</script>
+
 
 
 <!-- 

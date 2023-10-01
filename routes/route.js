@@ -3,7 +3,7 @@ var router = express.Router();
 const users = require('../services/users')
 
 // GET users  
-router.get('/', async function(req, res, next) {
+router.get('/userlist', async function(req, res, next) {
   try {
     data = await users.getMultipleUsers(req.query.page);
     var userData = data.users
@@ -29,7 +29,7 @@ router.post('/saveuser', async function(req, res, next) {
   }
   try {
     data = await users.saveUser(newUser);
-    res.redirect('/')
+    res.redirect('/userlist')
   }catch (err){
     console.error(`Error inserting user `, err.message);
     next(err);
@@ -58,7 +58,7 @@ router.post('/updateuser', async function(req, res, next) {
     console.error(`Error updating user `, err.message);
     next(err);
   }  
-  res.redirect('/')
+  res.redirect('/userlist')
 });
 
 // delete user
@@ -70,6 +70,10 @@ router.get('/deleteuser/:id', async function(req, res, next) {
     console.error(`Error deleting user `, err.message);
     next(err);
   }  
-  res.redirect('/')
+  res.redirect('/userlist')
 });
+router.get('/', function(req, res) {
+  res.render('index');
+});
+
 module.exports = router;
