@@ -1,49 +1,69 @@
 <%- include("layouts/header")-%>
 
-<a href="/insertuser">Create User</a>
-
 <div class="fixed inset-0 flex items-center justify-center z-50 overflow-x-hidden overflow-y-auto outline-none focus:outline-none modal-bg">
-  <div class="relative w-auto max-w-md mx-auto my-6">
-    <div class="modal-box">
-      <div class="text-xl font-semibold mb-4">Confirm User Deletion</div>
-      <p class="mb-4">Are you sure you want to delete this user?</p>
-      <div class="text-right">
-        <button class="btn btn-secondary mr-2" onclick="closeModal()"> Cancel
-        </button>
-        <a href="#" class="btn btn-error" id="confirmDeleteButton">Delete</a>
+  <div class="relative w-full h-full flex items-center justify-center">
+    <div class="w-auto max-w-md mx-auto">
+      <div class="modal-box">
+        <div class="text-xl font-semibold mb-4">Confirm User Deletion</div>
+        <p class="mb-4">Are you sure you want to delete this user?</p>
+        <div class="text-right">
+          <button class="btn btn-secondary mr-2" onclick="closeModal()">Cancel</button>
+          <a href="#" class="btn btn-error" id="confirmDeleteButton">Delete</a>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="overflow-x-auto">
-  <table class="table">
+  <div class="table-container">
+    <button class="btn btn-accent mx-5 my-3">
+      <i class="fa-solid fa-user-plus"></i>
+      <a href="/insertuser">Create User</a>
+    </button>
+
+  
+  <table class="table mx-5">
     <thead>
-      <tr class="bg-base-300">
-        <th>ID</th>
+      <tr class="bg-base-300 font-bold text-xl">
+        <th class="py-4">ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-        <th>Actions</th>
+        <th class="pl-8 pr-4">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% userList.forEach((user) => { %>
-      <tr class="hover">
+      <tr class="hover text-lg pl-16">
         <td><%= user.id %></td>
         <td><%= user.firstname %></td>
         <td><%= user.lastname %></td>
         <td><%= user.email %></td>
         <td class="join join-vertical lg:join-horizontal space-x-2 lg:space-x-2">
-          <button class="btn btn-secondary"><a href="/edituser/<%=user.id%>">Edit</a></button>
-          <button class="btn btn-error" onclick="openModal('<%= user.id %>')">Delete</button>
-        </td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+          <button class="btn border-base-100 bg-base-100"><a href="/edituser/<%=user.id%>"><i class="fa-solid fa-user-pen" style="color: #202327;"></i></a></button>
+          <button class="btn border-base-100 bg-base-100"  onclick="openModal('<%= user.id %>')"><i class="fa-solid fa-user-xmark" style="color: #dc2828;"></i></button>
+      </td>
+      
+      
+   
+      
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<div class="centered-buttons">
+<div class="join">
+  
+
+  <button class="join-item btn" id="prevPageButton">«</button>
+  <span class="join-item" id="currentPage">Page 1</span>
+  <button class="join-item btn" id="nextPageButton">»</button>
+  </div>
+</div>
 <script>
   // Functions to open and close the modal
   function openModal(userId) {
@@ -59,6 +79,74 @@
     const modalBg = document.querySelector('.modal-bg');
     modalBg.style.display = 'none';
   }
+       /// JavaScript code
+let currentPage = 1; // Initialize the current page to 1
+
+// Function to update the page number text and load content for the current page
+function updatePageNumber() {
+  document.getElementById('currentPage').textContent = `Page ${currentPage}`;
+  loadContent(currentPage); // Call a function to load content for the current page
+}
+
+// Function to handle the previous page button click
+document.getElementById('prevPageButton').addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePageNumber();
+  }
+});
+
+// Function to handle the next page button click
+document.getElementById('nextPageButton').addEventListener('click', () => {
+  // You should have a way to determine if there are more pages to navigate to
+  // For example, based on the total number of users and items per page
+  const morePagesAvailable = true; // Set this based on your logic
+
+  if (morePagesAvailable) {
+    currentPage++;
+    updatePageNumber();
+  }
+});
+
+// Function to load content for the specified page
+function loadContent(page) {
+  // Make an AJAX request to fetch user data for the specified page
+  fetch(`/userlist?page=${page}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Update the user list with the data received from the server
+      const userList = data.users;
+      const tableBody = document.querySelector('tbody'); // Adjust this selector based on your table structure
+
+      // Clear existing rows in the table body
+      tableBody.innerHTML = '';
+
+      // Iterate through the userList and create table rows for each user
+      userList.forEach((user) => {
+        const row = document.createElement('tr');
+        row.className = 'hover text-lg pl-16';
+
+        // Create and populate table cells for each user property (e.g., id, firstname, lastname, email)
+        const idCell = document.createElement('td');
+        idCell.textContent = user.id;
+        // Repeat this for other user properties
+
+        // Append cells to the row
+        row.appendChild(idCell);
+        // Repeat this for other cells
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+      });
+    })
+    .catch((error) => {
+      console.error('Error loading content:', error);
+    });
+}
+
+
+// Initial page number display
+updatePageNumber();
 </script>
 
 
@@ -80,6 +168,77 @@
           
         <% }) %>
       </ul>
+
+
+      /// JavaScript code
+let currentPage = 1; // Initialize the current page to 1
+
+// Function to update the page number text and load content for the current page
+function updatePageNumber() {
+  document.getElementById('currentPage').textContent = `Page ${currentPage}`;
+  loadContent(currentPage); // Call a function to load content for the current page
+}
+
+// Function to handle the previous page button click
+document.getElementById('prevPageButton').addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePageNumber();
+  }
+});
+
+// Function to handle the next page button click
+document.getElementById('nextPageButton').addEventListener('click', () => {
+  // You should have a way to determine if there are more pages to navigate to
+  // For example, based on the total number of users and items per page
+  const morePagesAvailable = true; // Set this based on your logic
+
+  if (morePagesAvailable) {
+    currentPage++;
+    updatePageNumber();
+  }
+});
+
+// Function to load content for the specified page
+function loadContent(page) {
+  // Make an AJAX request to fetch user data for the specified page
+  fetch(`/userlist?page=${page}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Update the user list with the data received from the server
+      const userList = data.users;
+      const tableBody = document.querySelector('tbody'); // Adjust this selector based on your table structure
+
+      // Clear existing rows in the table body
+      tableBody.innerHTML = '';
+
+      // Iterate through the userList and create table rows for each user
+      userList.forEach((user) => {
+        const row = document.createElement('tr');
+        row.className = 'hover text-lg pl-16';
+
+        // Create and populate table cells for each user property (e.g., id, firstname, lastname, email)
+        const idCell = document.createElement('td');
+        idCell.textContent = user.id;
+        // Repeat this for other user properties
+
+        // Append cells to the row
+        row.appendChild(idCell);
+        // Repeat this for other cells
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+      });
+    })
+    .catch((error) => {
+      console.error('Error loading content:', error);
+    });
+}
+
+
+// Initial page number display
+updatePageNumber();
+
     -->
       <%- include("layouts/footer") -%> 
 

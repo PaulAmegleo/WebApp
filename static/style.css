@@ -5,4 +5,18 @@
 .modal-bg {
     display: none;
   }
+
   
+  .table-container {
+    width: 100%; 
+    max-width: 90%; 
+    margin: 0 auto;
+    overflow-x: auto;
+    padding: 16px; 
+  }
+
+  .centered-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

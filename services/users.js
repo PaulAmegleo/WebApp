@@ -48,10 +48,13 @@ async function deleteUser(id){
   );
 }
 
+
+
 module.exports = {
   getMultipleUsers,
   getUser,
   saveUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  
 }
