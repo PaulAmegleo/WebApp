@@ -1,5 +1,5 @@
 <%- include("layouts/header")-%>
-<div class="flex items-center justify-center mt-40"> 
+<div class="flex items-center justify-center mt-28"> 
     <div class="bg-base-300 p-8 rounded shadow-md w-full max-w-md">
         <form action="/saveUser" method="POST" class="space-y-4" autocomplete="off">
             <h2 class="text-2xl font-semibold mb-4">Add User</h2>
@@ -11,7 +11,7 @@
                     name="firstname"
                     placeholder="Enter first name"
                     class="input border-slate-800"
-                    required
+                    required pattern="[A-Za-z\s]+"
                 >
             </div>
 
@@ -23,7 +23,7 @@
                     name="lastname"
                     placeholder="Enter last name"
                     class="input border-slate-800"
-                    required
+                    required pattern="[A-Za-z\s]+"
                 >
             </div>
 

@@ -18,15 +18,15 @@
 <div class="overflow-x-auto">
   <div class="table-container">
     <div class=" overflow-auto">
-    <button class="btn btn-accent mx-5 my-3">
+    <button class="btn btn-accent mx-5 my-3 mt-1">
       <i class="fa-solid fa-user-plus"></i>
       <a href="/insertuser">Create User</a>
     </button>
 
-    <div class="join inset-y-0 right-0">
+    <div class="join relative left-1/2 ml-44">
       <form action="/userlist" method="GET">
-        <input type="text" class="search-input" placeholder="Search by ID" name="q" value="<%= searchQuery %>" autocomplete="off">
-        <button type="submit" class="search-button">Search</button>
+        <input type="text" class="input-md" placeholder="Search by ID" name="q" value="<%= searchQuery %>" autocomplete="off">
+        <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass fa-lg" style="color:#202327"></i></button>
       </form>
     </div>
   </div>
