@@ -79,74 +79,7 @@
     const modalBg = document.querySelector('.modal-bg');
     modalBg.style.display = 'none';
   }
-       /// JavaScript code
-let currentPage = 1; // Initialize the current page to 1
 
-// Function to update the page number text and load content for the current page
-function updatePageNumber() {
-  document.getElementById('currentPage').textContent = `Page ${currentPage}`;
-  loadContent(currentPage); // Call a function to load content for the current page
-}
-
-// Function to handle the previous page button click
-document.getElementById('prevPageButton').addEventListener('click', () => {
-  if (currentPage > 1) {
-    currentPage--;
-    updatePageNumber();
-  }
-});
-
-// Function to handle the next page button click
-document.getElementById('nextPageButton').addEventListener('click', () => {
-  // You should have a way to determine if there are more pages to navigate to
-  // For example, based on the total number of users and items per page
-  const morePagesAvailable = true; // Set this based on your logic
-
-  if (morePagesAvailable) {
-    currentPage++;
-    updatePageNumber();
-  }
-});
-
-// Function to load content for the specified page
-function loadContent(page) {
-  // Make an AJAX request to fetch user data for the specified page
-  fetch(`/userlist?page=${page}`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Update the user list with the data received from the server
-      const userList = data.users;
-      const tableBody = document.querySelector('tbody'); // Adjust this selector based on your table structure
-
-      // Clear existing rows in the table body
-      tableBody.innerHTML = '';
-
-      // Iterate through the userList and create table rows for each user
-      userList.forEach((user) => {
-        const row = document.createElement('tr');
-        row.className = 'hover text-lg pl-16';
-
-        // Create and populate table cells for each user property (e.g., id, firstname, lastname, email)
-        const idCell = document.createElement('td');
-        idCell.textContent = user.id;
-        // Repeat this for other user properties
-
-        // Append cells to the row
-        row.appendChild(idCell);
-        // Repeat this for other cells
-
-        // Append the row to the table body
-        tableBody.appendChild(row);
-      });
-    })
-    .catch((error) => {
-      console.error('Error loading content:', error);
-    });
-}
-
-
-// Initial page number display
-updatePageNumber();
 </script>
 
 
