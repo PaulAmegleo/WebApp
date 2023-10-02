@@ -17,12 +17,20 @@
 
 <div class="overflow-x-auto">
   <div class="table-container">
+    <div class=" overflow-auto">
     <button class="btn btn-accent mx-5 my-3">
       <i class="fa-solid fa-user-plus"></i>
       <a href="/insertuser">Create User</a>
     </button>
 
-  
+    <div class="join inset-y-0 right-0">
+      <form action="/userlist" method="GET">
+        <input type="text" class="search-input" placeholder="Search by ID" name="q" value="<%= searchQuery %>" autocomplete="off">
+        <button type="submit" class="search-button">Search</button>
+      </form>
+    </div>
+  </div>
+
   <table class="table mx-5">
     <thead>
       <tr class="bg-base-300 font-bold text-xl">
@@ -52,18 +60,20 @@
         <% }) %>
       </tbody>
     </table>
+    <div class="pagination centered-buttons">
+      <%
+        for (let i = 1; i <= totalPages; i++) {
+          const isActive = currentPage === i ? 'active' : '';
+      %>
+      <button class="btn btn-base space-x-2 m-1.5"><a href="/userlist?page=<%= i %>&q=<%= searchQuery %>" class="pagination-button <%= isActive %>"><%= i %></a></button>
+      <%
+        }
+      %>
+    </div>
   </div>
 </div>
 
-<div class="centered-buttons">
-<div class="join">
-  
 
-  <button class="join-item btn" id="prevPageButton">«</button>
-  <span class="join-item" id="currentPage">Page 1</span>
-  <button class="join-item btn" id="nextPageButton">»</button>
-  </div>
-</div>
 <script>
   // Functions to open and close the modal
   function openModal(userId) {

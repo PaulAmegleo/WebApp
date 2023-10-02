@@ -15,7 +15,7 @@
                     value="<%= user.firstname %>"
                     placeholder="Enter first name"
                     class="input border-slate-800"
-                    required
+                    required pattern="[A-Za-z\s]+"
                     >
             </div>
 
@@ -28,7 +28,8 @@
                     value="<%= user.lastname %>"
                     placeholder="Enter last name"
                     class="input border-slate-800"
-                    required                >
+                    required pattern="[A-Za-z\s]+"               
+                    >
             </div>
 
             <div class="flex flex-col">
