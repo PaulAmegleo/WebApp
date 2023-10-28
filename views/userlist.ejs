@@ -18,15 +18,17 @@
 <div class="overflow-x-auto">
   <div class="table-container">
     <div class=" overflow-auto">
-    <button class="btn btn-accent mx-5 my-3 mt-1">
-      <i class="fa-solid fa-user-plus"></i>
-      <a href="/insertuser">Create User</a>
-    </button>
+      <button class="btn btn-accent mx-5 my-3 mt-1">
+        <i class="fa-solid fa-user-plus"></i>
+        <a href="/insertuser" aria-label="Create User" title="Create User">
+          Create User
+        </a>
+      </button>
 
     <div class="join relative left-1/2 ml-44">
       <form action="/userlist" method="GET">
         <input type="text" class="input-md" placeholder="Search User by ID" name="q" value="<%= searchQuery %>" autocomplete="off">
-        <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass fa-lg" style="color:#202327"></i></button>
+        <button type="submit" aria-label="Search" class="search-button"><i class="fa-solid fa-magnifying-glass fa-lg" style="color:#202327"></i></button>
       </form>
     </div>
   </div>
@@ -48,9 +50,15 @@
         <td><%= user.firstname %></td>
         <td><%= user.lastname %></td>
         <td><%= user.email %></td>
+
         <td class="join join-vertical lg:join-horizontal space-x-2 lg:space-x-2">
-          <button class="btn border-base-100 bg-base-100"><a href="/edituser/<%=user.id%>"><i class="fa-solid fa-user-pen" style="color: #202327;"></i></a></button>
-          <button class="btn border-base-100 bg-base-100"  onclick="openModal('<%= user.id %>')"><i class="fa-solid fa-user-xmark" style="color: #dc2828;"></i></button>
+          <button class="btn border-base-100 bg-base-100">
+            <a href="/edituser/<%=user.id%>" aria-label="Edit User" title="Edit User">
+              <i class="fa-solid fa-user-pen" style="color: #202327;"></i>
+            </a>
+          </button>
+
+          <button class="btn border-base-100 bg-base-100" aria-label="Delete User" title="Delete User" onclick="openModal('<%= user.id %>')"><i class="fa-solid fa-user-xmark" style="color: #dc2828;"></i></button>
       </td>
       
       

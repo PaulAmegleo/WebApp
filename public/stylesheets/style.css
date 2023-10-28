@@ -1735,10 +1735,6 @@ html {
   position: fixed;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
 }
@@ -1790,6 +1786,10 @@ html {
   margin-bottom: 1rem;
 }
 
+.mb-80 {
+  margin-bottom: 20rem;
+}
+
 .ml-44 {
   margin-left: 11rem;
 }
@@ -1808,38 +1808,6 @@ html {
 
 .mt-44 {
   margin-top: 11rem;
-}
-
-.mb-7 {
-  margin-bottom: 1.75rem;
-}
-
-.mb-52 {
-  margin-bottom: 13rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.mb-80 {
-  margin-bottom: 20rem;
-}
-
-.mb-72 {
-  margin-bottom: 18rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mb-9 {
-  margin-bottom: 2.25rem;
 }
 
 .block {
@@ -1884,10 +1852,6 @@ html {
 
 .flex-1 {
   flex: 1 1 0%;
-}
-
-.flex-grow-0 {
-  flex-grow: 0;
 }
 
 .flex-col {
